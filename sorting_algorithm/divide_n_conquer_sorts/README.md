@@ -1,4 +1,4 @@
-# 단순/기초 정렬 (Divide and Conquer Sorts)
+# 분할 정복 정렬 (Divide and Conquer Sorts)
 
 # 병합 정렬 (Merge Sort)
 
@@ -26,7 +26,8 @@ $O(n)$ (병합 과정을 위한 추가적인 배열 공간이 필요함)
         <td align="center"><b>병합 정렬 순서</b></td>
     </tr>
     <tr>
-        <td><img alt="image" src="https://github.com/user-attachments/assets/cb7a2bb3-69b8-45e4-9ce2-64188e61efdb" /></td>
+        <td><img alt="image" src="https://github.com/user-attachments/assets/15859ec8-e3d8-41aa-88d0-01b0d2115bb4" />
+</td>
     </tr>
 </table>
 
