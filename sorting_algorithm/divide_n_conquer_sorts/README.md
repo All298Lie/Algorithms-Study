@@ -21,6 +21,14 @@ $O(n)$ (병합 과정을 위한 추가적인 배열 공간이 필요함)
 3. 두 개의 분할된 배열을 순서대로 비교하며 하나의 정렬된 배열로 합친다.  
 4. 병합 시, 두 부분 배열의 첫 번째 원소들을 서로 비교하여 더 작은 값을 새로운 임시 배열에 순서대로 채워 넣는다.  
 5. 모든 부분 배열이 하나로 병합될 때까지 이 과정을 반복한다.
+<table align="center">
+    <tr>
+        <td align="center"><b>병합 정렬 순서</b></td>
+    </tr>
+    <tr>
+        <td><img alt="image" src="https://github.com/user-attachments/assets/cb7a2bb3-69b8-45e4-9ce2-64188e61efdb" /></td>
+    </tr>
+</table>
 
 ## 3. 장단점 및 특징
 ### 장점
