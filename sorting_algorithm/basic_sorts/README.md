@@ -21,6 +21,15 @@ $O(1)$ (추가 메모리를 거의 사용하지 않음)
 3. 배열의 끝까지 이동하며 이 과정을 수행하면, 가장 큰 원소가 맨 뒤로 이동하여 고정된다.
 4. 고정된 맨 뒷자리를 제외하고, 나머지 원소들에 대해 위 과정을 반복한다.
 5. 더 이상 교환이 일어나지 않을 때까지 반복한다.
+<table align="center">
+    <tr>
+        <td align="center"><b>버블 정렬 순서</b></td>
+    </tr>
+    <tr>
+        <td><img alt="image" src="https://github.com/user-attachments/assets/de47fca0-62b2-4212-8ab4-c99df7086532" /></td>
+    </tr>
+</table>
+
 
 ## 3. 장단점 및 특징
 ### 장점
