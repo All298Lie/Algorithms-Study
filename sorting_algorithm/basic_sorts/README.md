@@ -175,6 +175,14 @@ $O(1)$
 4. `key`보다 작은 원소를 만나거나 배열의 맨 앞에 도달할 때까지 3번 과정을 반복한다.
 5. 이동이 멈춘 빈 자리에 `key` 값을 저장(삽입)한다.  
 6. 마지막 원소까지 위 과정을 반복한다.
+<table align="center">
+    <tr>
+        <td align="center"><b>삽입 정렬 순서</b></td>
+    </tr>
+    <tr>
+        <td><img alt="image" src="https://github.com/user-attachments/assets/488db070-0fea-4e37-baac-b50c093b533c" /></td>
+    </tr>
+</table>
 
 ## 3. 장단점 및 특징
 ### 장점
