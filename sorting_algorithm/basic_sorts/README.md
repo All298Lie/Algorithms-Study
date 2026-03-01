@@ -45,26 +45,26 @@ using namespace std;
 
 void BubbleSort(vector<int>& arr)
 {
-		int n = arr.size();
+	int n = arr.size();
 	
-		// i : 고정될 뒷 부분의 시작 인덱스를 결정하기 위한 루프
-		for (int i = 0; i < n - 1; i++)
+	// i : 고정될 뒷 부분의 시작 인덱스를 결정하기 위한 루프
+	for (int i = 0; i < n - 1; i++)
+	{
+		bool isSwapped = false; // 이번 턴에 교환이 있었는지 확인
+		
+		// j : 실제 비교 및 교환을 수행하는 루프 (이미 정렬된 뒤쪽은 제외 : n - 1 - j)
+		for (int j = 0; j < n - 1 - i; j++)
 		{
-				bool isSwapped = false; // 이번 턴에 교환이 있었는지 확인
-		
-				// j : 실제 비교 및 교환을 수행하는 루프 (이미 정렬된 뒤쪽은 제외 : n - 1 - j)
-				for (int j = 0; j < n - 1 - i; j++)
-				{
-						if (arr[j] > arr[j + 1])
-						{
-								swap(arr[j], arr[j + 1]);
-								isSwapped = true;
-						}
-				}
-		
-				// 이번 회차에서 교환이 한 번도 없었다면 이미 정렬된 상태이므로 루프 탈출
-				if (!isSwapped) break;
+			if (arr[j] > arr[j + 1])
+			{
+				swap(arr[j], arr[j + 1]);
+				isSwapped = true;
+			}
 		}
+		
+		// 이번 회차에서 교환이 한 번도 없었다면 이미 정렬된 상태이므로 루프 탈출
+		if (!isSwapped) break;
+	}
 }
 ```
 
@@ -74,21 +74,68 @@ void BubbleSort(vector<int>& arr)
 
 ## 1. 개요 및 복잡도
 ### 시간 복잡도
+최선 : $O(n^2)$)  
+평균 : $O(n^2)$  
+최악 : $O(n^2)$
 
 ### 공간 복잡도
+$O(1)$
 
 ### 핵심 요약
+- 전체 데이터 중 '가장 작은 값'을 찾아 선택하여 맨 앞의 값과 교환하는 과정을 반복하는 방식
 
 ## 2. 동작 원리
+1. 주어진 리스트 중에서 최소 값을 찾는다.
+2. 그 값을 맨 앞에 위치한 값과 교환한다.
+3. 맨 처음 위치를 뺀 나머지 리스트를 같은 방법으로 교체한다.
+4. 하나의 원소만 남을 때 까지 위 1 ~ 3  과정을 반복한다.
 
 ## 3. 장단점 및 특징
 ### 장점
+- 버블 정렬보다 교환 횟수가 적어, 데이터 이동이 부담스러운 환경에서 약간 더 유리하다.
+- 구현이 단순하다.
 
 ### 단점
+- 데이터가 이미 정렬되어 있어도 무조건 전체를 순회하므로 항상 $O(n^2)$이 걸려 비효율적이다.
 
 ### 특이사항
-
+- 불안정 정렬 : 구현 방식에 따라 다르지만, 일반적으로 같은 값의 순서가 바뀔 수 있다.
+- In-place Sort : 제자리 정렬이다.
+[SelectionSort.cpp 전체 코드 파일 확인](./SelectionSort.cpp)
 ## 4. 구현 (C++)
+
+```cpp
+#include <vector>
+#include <algorithm> // swap 함수 사용
+
+using namespace std;
+
+void SelectionSort(vector<int>& arr)
+{
+	int n = arr.size();
+		
+	// i : 정렬이 완료된 부분의 끝을 나타냄 (0부터 n - 2까지)
+	for (int i = 0; i < n - 1; i++)
+	{
+		int minIndex = i;
+				
+		// j : 최솟값을 찾기 위한 탐색 루프
+		for (int j = i + 1; j < n; j++)
+		{
+			if (arr[j] < arr[minIndex])
+			{
+				minIndex = j;
+			}
+		}
+				
+		// 최솟값이 자기 자신이 아니라면 교환
+		if (minIndex != i)
+		{
+			swap(arr[i], arr[minIndex]);
+		}
+	}
+}
+```
 
 ---
 
