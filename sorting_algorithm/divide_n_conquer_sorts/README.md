@@ -128,6 +128,14 @@ void MergeSort(vector<int>& arr, int left, int right) {
 2. 피벗을 기준으로 배열을 탐색하며, 피벗보다 작은 원소들은 모두 피벗의 왼쪽으로, 피벗보다 큰 원소들은 모두 피벗의 오른쪽으로 옮긴다. (이 과정이 끝나면 피벗의 최종 위치 확정됨)  
 3. 피벗을 기준으로 나뉜 왼쪽 부분 배열과 오른쪽 부분 배열에 대해 각각 새로운 피벗을 설정하고 분할 과정을 재귀적으로 반복한다.  
 4. 부분 배열의 크기가 1 이하가 되면 정렬이 완료된 것으로 간주하고 재귀를 종료한다.
+<table align="center">
+    <tr>
+        <td align="center"><b>퀵 정렬 순서</b></td>
+    </tr>
+    <tr>
+        <td><img alt="image" src="https://github.com/user-attachments/assets/84f4b832-d7a3-42d0-98d2-1e5393295e72" /></td>
+    </tr>
+</table>
 
 ## 3. 장단점 및 특징
 ### 장점
