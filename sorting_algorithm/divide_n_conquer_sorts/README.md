@@ -211,6 +211,16 @@ $O(n)$ (주어진 배열 내부에서 자리만 바꾸며 정렬을 수행하므
 3. 가장 큰 값이 맨 뒤로 이동하여 자리가 확정되었으므로, 이 원소를 정렬 대상(힙의 크기)에서 제외한다.  
 4. 맨 뒤로 간 원소를 제외한 나머지 원소들을 대상으로, 루트 노드부터 다시 Heapify를 수행하여 최대 힙 구조를 복원한다.  
 5. 힙의 크기가 1이 될 때까지 2~4번 과정을 반복하면 오름차순 정렬이 완료된다.
+<table align="center">
+    <tr>
+        <td align="center"><b>힙 정렬 순서</b></td>
+        <td align="center"><b>Max Heap 구조로 정렬이 끝난 모습</b></td>
+    </tr>
+    <tr>
+        <td><img alt="image" src="https://github.com/user-attachments/assets/152d3e5d-d0e6-4e45-8dfd-799a872fda69" /></td>
+        <td><img alt="image" src="https://github.com/user-attachments/assets/85413fd5-22a9-4778-aaba-c0cdd6a4de61" /></td>
+    </tr>
+</table>
 
 ## 3. 장단점 및 특징
 ### 장점
@@ -226,6 +236,7 @@ $O(n)$ (주어진 배열 내부에서 자리만 바꾸며 정렬을 수행하므
 - In-place Sort : 제자리 정렬로, 재귀 호출을 위한 스택 메모리 외에 데이터 정렬 자체를 위한 별도의 추가 메모리 공간이 필요하지 않다.
 
 ## 4. 구현 (C++)
+[HeapSort.cpp 전체 코드 파일 확인](./HeapSort.cpp)
 ```cpp
 #include <vector>
 #include <algorithm> // swap 함수 사용
