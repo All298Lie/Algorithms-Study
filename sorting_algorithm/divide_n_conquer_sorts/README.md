@@ -294,18 +294,109 @@ void HeapSort(vector<int>& arr) {
 
 ## 1. 개요 및 복잡도
 ### 시간 복잡도
+최선 : $O(n\log n)$ (트리가 좌우로 균형 잡힌 형태로 생성되는 경우)  
+평균 : $O(n\log n)$  
+최악 : $O(n^2)$
 
 ### 공간 복잡도
+$O(n)$ (이진 탐색 트리를 구성하기 위해 각 노드마다 동적 메모리 할당이 필요)
 
 ### 핵심 요약
+- 정렬할 원소들을 하나씩 삽입하여 이진 탐색 트리를 구성한 뒤, 이를 중위 순회하여 정렬된 결과를 얻어내는 방식  
+- 데이터의 삽입과 동시에 정렬이 이루어지며, 탐색 알고리즘인 이진 탐색 트리의 특성을 정렬에 그대로 활용하는 알고리즘
 
 ## 2. 동작 원리
+1. 배열의 첫 번째 원소를 이진 탐색 트리의 루트(Root) 노드로 설정한다.  
+2. 배열의 나머지 원소들을 순서대로 트리에 삽입한다. 이때 삽입할 값이 현재 노드의 값보다 작으면 왼쪽 자신으로, 크거나 같으면 오른쪽 자신으로 배치한다.  
+3. 모든 원소의 삽입이 완료되어 트리가 완성되면, 트리를 중위 순회한다. (중위 순화: 왼쪽 자식 → 부모 → 오른쪽 자식 순으로 방문)  
+4. 중위 순회를 하면서 방문하는 노드의 값을 순서대로 배열에 다시 덮어쓰면 오름차순 정렬이 완료된다.
 
 ## 3. 장단점 및 특징
 ### 장점
+- 트리가 이미 구성되어 있다면 데이터의 추가 삽입과 정렬된 상태 유지가 매우 빠르고 직관적이다.  
+- 포인터를 이용해 노드를 연결하므로, 배열의 크기를 미리 알 필요가 없는 동적 데이터 처리에 유리하다.  
 
 ### 단점
+- 데이터가 이미 오름차순이나 내림차순으로 정렬된 경우 트리가 한쪽으로 쏠리게 되어 최악의 시간 복잡도인 $O(n^2)$을 가진다. (이를 방지하기 위해 AVL 트리나 레드-블랙 트리를 사용한다면 구현이 매우 복잡해진다.)  
+- 트리를 구성하기 위한 노드(포인터) 생성 등 추가적인 메모리 공간($O(n)$)이 반드시 필요하다.
 
 ### 특이사항
+- 안정 정렬 : 값이 같은 노드를 삽입할 때 항상 오른쪽(또는 왼쪽) 서브 트리로 보내는 등 삽입 규칙을 일정하게 유지하면 안정 정렬로 구현할 수 있다.  
+- Out-of-place Sort : 제자리 정렬이 아니며, 이진 탐색 트리를 만들기 위한 별도의 힙 메모리 공간이 요구된다.
 
 ## 4. 구현 (C++)
+[TreeSort.cpp 전체 코드 파일 확인](./TreeSort.cpp)
+```cpp
+#include <vector>
+
+using namespace std;
+
+// 이진 탐색 트리의 노드 구조체
+struct Node
+{
+    int data;
+    Node* left;
+    Node* right;
+    Node(int val) : data(val), left(nullptr), right(nullptr) {}
+};
+
+// 트리에 새로운 값을 삽입하는 재귀 함수
+Node* Insert(Node* node, int data)
+{
+    if (node == nullptr) return new Node(data);
+
+    // 현재 노드보다 작으면 왼쪽, 크거나 같으면 오른쪽으로 이동
+    if (data < node->data)
+    {
+        node->left = Insert(node->left, data);
+    }
+    else
+    {
+        node->right = Insert(node->right, data);
+    }
+    return node;
+}
+
+// 중위 순회(In-order Traversal)를 하며 배열에 값을 덮어쓰는 함수
+void StoreSorted(Node* node, vector<int>& arr, int& index)
+{
+    if (node != nullptr)
+    {
+        StoreSorted(node->left, arr, index);   // 왼쪽 서브 트리 방문
+        arr[index++] = node->data;             // 현재 노드 값 저장
+        StoreSorted(node->right, arr, index);  // 오른쪽 서브 트리 방문
+    }
+}
+
+// 후위 순회하여 자식 노드를 먼저 메모리 해제를 시킨 후, 자신을 메모리 해제하는 함수
+void Delete(Node* node)
+{
+    if (node != nullptr)
+    {
+        Delete(node->left);
+        Delete(node->right);
+        delete node;
+    }
+}
+
+// 트리 정렬 메인 함수
+void TreeSort(vector<int>& arr)
+{
+    if (arr.empty()) return;
+
+    Node* root = nullptr;
+
+    // 1. 배열의 모든 원소를 이진 탐색 트리에 삽입
+    for (int val : arr)
+    {
+        root = Insert(root, val);
+    }
+
+    // 2. 트리를 중위 순회하며 원본 배열에 정렬된 값 저장
+    int index = 0;
+    StoreSorted(root, arr, index);
+
+    // 3. 동적할당된 트리를 메모리 해제하여 메모리 누수 방지
+    Delete(root);
+}
+```
